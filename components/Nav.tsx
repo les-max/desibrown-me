@@ -6,7 +6,7 @@ export default function Nav() {
       <div className="max-w-2xl mx-auto px-6 h-14 flex items-center">
         <Link
           href="/"
-          className="font-serif text-xl text-foreground hover:text-accent transition-colors"
+          className="font-serif text-xl font-medium opsz-text text-foreground hover:text-accent transition-colors duration-200"
         >
           Desi Brown
         </Link>

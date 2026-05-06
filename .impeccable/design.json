@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-06T00:00:00Z",
+  "title": "Design System: Desi Brown",
+  "extensions": {
+    "colorMeta": {
+      "warm-ash-cream": { "role": "neutral", "displayName": "Warm Ash Cream", "canonical": "oklch(97% 0.006 60)", "tonalRamp": ["#2A2520","#4A3E38","#6B5A52","#8A7F78","#B5A89E","#D4CCC6","#E5DED7","#F2EDE9","#FAF7F4","#FDFBF9"] },
+      "deep-charcoal": { "role": "neutral", "displayName": "Deep Charcoal", "canonical": "oklch(18% 0.01 55)", "tonalRamp": ["#1A1410","#2A2520","#3D3530","#544A44","#6B5A52","#8A7F78","#A89E98","#C4BBB5","#DDD7D2","#F2EDE9"] },
+      "terracotta": { "role": "primary", "displayName": "Terracotta", "canonical": "oklch(57% 0.1 45)", "tonalRamp": ["#3D1F14","#5C2E1C","#7A3E28","#965036","#B5725A","#C98B72","#DBA898","#EAC8BB","#F4E2DA","#FBF3EF"] },
+      "warm-gray": { "role": "neutral", "displayName": "Warm Gray", "canonical": "oklch(54% 0.012 55)", "tonalRamp": ["#1A1410","#2A2520","#3D3530","#544A44","#6B5A52","#8A7F78","#A89E98","#C4BBB5","#DDD7D2","#F2EDE9"] },
+      "cream-border": { "role": "neutral", "displayName": "Cream Border", "canonical": "oklch(90% 0.008 60)", "tonalRamp": ["#2A2520","#4A3E38","#6B5A52","#8A7F78","#B5A89E","#C8C0BA","#D8D2CC","#E5DED7","#F0EBE6","#FAF7F4"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Site name on homepage only. Huge, tight, dramatic." },
+      "headline": { "displayName": "Headline", "purpose": "Individual post titles on post pages." },
+      "title": { "displayName": "Title", "purpose": "Post card titles in the blog list." },
+      "body": { "displayName": "Body", "purpose": "All post body copy. Inter only. 65ch max." },
+      "label": { "displayName": "Label", "purpose": "Dates, metadata, tags. Uppercase, spaced, tiny." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "color-transition", "value": "color 200ms ease-out, background-color 200ms ease-out", "purpose": "Hover state color changes on buttons, links, and post card titles." },
+      { "name": "image-scale", "value": "transform 500ms ease-out", "purpose": "Subtle scale on post card photo hover." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Used for publish, submit, and primary CTAs.",
+      "html": "<button class=\"ds-btn-primary\">Publish</button>",
+      "css": ".ds-btn-primary { background: #2A2520; color: #FAF7F4; padding: 12px 24px; font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; border: none; border-radius: 2px; cursor: pointer; transition: background-color 200ms ease-out; } .ds-btn-primary:hover { background: #B5725A; } .ds-btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }"
+    },
+    {
+      "name": "Ghost Button",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Used for secondary actions like Save Draft.",
+      "html": "<button class=\"ds-btn-ghost\">Save draft</button>",
+      "css": ".ds-btn-ghost { background: transparent; color: #2A2520; padding: 12px 24px; font-family: Inter, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; border: 1px solid #E5DED7; border-radius: 2px; cursor: pointer; transition: border-color 200ms ease-out; } .ds-btn-ghost:hover { border-color: #2A2520; } .ds-btn-ghost:disabled { opacity: 0.4; cursor: not-allowed; }"
+    },
+    {
+      "name": "Navigation",
+      "kind": "nav",
+      "refersTo": "nav",
+      "description": "Top nav bar. Cream background, site name in Fraunces.",
+      "html": "<nav class=\"ds-nav\"><a href=\"/\" class=\"ds-nav-title\">Desi Brown</a></nav>",
+      "css": ".ds-nav { background: #FAF7F4; border-bottom: 1px solid #E5DED7; height: 56px; display: flex; align-items: center; padding: 0 24px; } .ds-nav-title { font-family: 'Fraunces', Georgia, serif; font-size: 1.25rem; font-weight: 500; color: #2A2520; text-decoration: none; transition: color 200ms ease-out; } .ds-nav-title:hover { color: #B5725A; }"
+    },
+    {
+      "name": "Post Card",
+      "kind": "card",
+      "refersTo": "post-card",
+      "description": "Blog post preview. No container box — sits directly on the cream field.",
+      "html": "<article class=\"ds-post-card\"><time class=\"ds-post-date\">May 6, 2026</time><h2 class=\"ds-post-title\">This is a post title</h2><p class=\"ds-post-excerpt\">A short excerpt from the post body goes here, trailing off naturally…</p></article>",
+      "css": ".ds-post-card { display: block; } .ds-post-date { display: block; font-family: Inter, system-ui, sans-serif; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: #8A7F78; } .ds-post-title { font-family: 'Fraunces', Georgia, serif; font-size: 1.25rem; font-weight: 500; color: #2A2520; margin: 6px 0 8px; line-height: 1.3; transition: color 200ms ease-out; } .ds-post-card:hover .ds-post-title { color: #B5725A; } .ds-post-excerpt { font-family: Inter, system-ui, sans-serif; font-size: 0.9rem; color: #8A7F78; line-height: 1.7; }"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Form field for email, title, body.",
+      "html": "<input class=\"ds-input\" type=\"email\" placeholder=\"your@email.com\" />",
+      "css": ".ds-input { width: 100%; padding: 12px 16px; font-family: Inter, system-ui, sans-serif; font-size: 1rem; color: #2A2520; background: #FFFFFF; border: 1px solid #E5DED7; border-radius: 2px; outline: none; transition: border-color 200ms ease-out; } .ds-input::placeholder { color: #8A7F78; } .ds-input:focus { border-color: #B5725A; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Marked-Up Script",
+    "overview": "This is a blog that feels like a working document — a script with pencil marks in the margins, dog-eared pages, a coffee ring on the cover. It's warm, personal, and a little wacky. Not designed to impress; designed to feel like her. The theater reference lives in the subtext: there's a sense of performance and timing in how content is revealed, but the costume never shows.\n\nFraunces anchors the voice — quirky, literary, expressive. Inter handles the words — clean and invisible. The cream field is never clinical. The terracotta is never loud.",
+    "keyCharacteristics": [
+      "Fraunces for all display and headline typography",
+      "Warm cream (#FAF7F4) base, never clinical white",
+      "Terracotta accent at ≤10% of any surface",
+      "Flat elevation: no shadows, depth through tonal contrast only",
+      "Loose and approachable components",
+      "Label style (0.7rem, uppercase, letter-spaced) for all metadata"
+    ],
+    "rules": [
+      { "name": "The Rarity Rule", "body": "Terracotta appears on ≤10% of any given screen. It's a punctuation mark, not a sentence.", "section": "colors" },
+      { "name": "The Never Cool Rule", "body": "Every color tilts warm. If a new color is needed, it must lean brown or amber.", "section": "colors" },
+      { "name": "The One Serif Rule", "body": "Fraunces is the only serif in the system. Do not introduce a second serif.", "section": "typography" },
+      { "name": "The Optical Size Rule", "body": "At display sizes (>3rem), use font-variation-settings: 'opsz' 144. At title sizes (<2rem), use 'opsz' 9.", "section": "typography" },
+      { "name": "The Flat Rule", "body": "If depth is needed, step up the background tone. Never reach for a shadow.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do use Fraunces for every heading and display text.",
+      "Do set the homepage site name extremely large: clamp(3rem, 8vw, 6rem), weight 900, tight leading.",
+      "Do keep photos full-bleed with no border-radius.",
+      "Do use the label style (0.7rem, uppercase, Inter 500) for dates and metadata.",
+      "Do let whitespace breathe generously."
+    ],
+    "donts": [
+      "Don't make it look like a generic Squarespace blog.",
+      "Don't make it slick or polished.",
+      "Don't make it look like a fashion magazine.",
+      "Don't make literal theater references.",
+      "Don't use Terracotta for backgrounds or large blocks.",
+      "Don't introduce cool-leaning colors.",
+      "Don't use rounded pills.",
+      "Don't add shadows. Ever."
+    ]
+  }
+}

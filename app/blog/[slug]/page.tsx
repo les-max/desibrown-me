@@ -56,21 +56,33 @@ export default async function PostPage({ params }: Props) {
       <main className="max-w-2xl mx-auto px-6 py-12">
         <Link
           href="/"
-          className="text-sm text-muted hover:text-accent transition-colors inline-block mb-10"
+          className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted hover:text-accent transition-colors duration-200 inline-block mb-12"
+          style={{ fontFamily: 'var(--font-sans)' }}
         >
           ← Back
         </Link>
 
         <article>
-          <header className="mb-10">
-            <time className="text-xs text-muted tracking-wide uppercase">
+          <header className="mb-10 pb-8 border-b border-border">
+            <time
+              className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted"
+              style={{ fontFamily: 'var(--font-sans)' }}
+            >
               {new Date(post.created_at).toLocaleDateString('en-US', {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric',
               })}
             </time>
-            <h1 className="font-serif text-4xl mt-2 leading-tight">{post.title}</h1>
+            <h1
+              className="font-serif font-bold opsz-display mt-3 leading-tight text-foreground"
+              style={{
+                fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {post.title}
+            </h1>
           </header>
 
           {post.body && (
@@ -83,14 +95,14 @@ export default async function PostPage({ params }: Props) {
 
           {photos.length > 0 && (
             <div
-              className={`mt-10 grid gap-2 ${
+              className={`mt-12 grid gap-1.5 ${
                 photos.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
               }`}
             >
               {photos.map((photo, i) => (
                 <div
                   key={photo.id}
-                  className={`relative overflow-hidden rounded-sm ${
+                  className={`relative overflow-hidden ${
                     photos.length === 1 ? 'aspect-[4/3]' : 'aspect-square'
                   }`}
                 >

@@ -26,13 +26,13 @@ export default function PostCard({ post }: { post: Post }) {
     ?.slice()
     .sort((a, b) => a.order_index - b.order_index)[0]
 
-  const excerpt = post.body ? stripMarkdown(post.body).slice(0, 160) : null
+  const excerpt = post.body ? stripMarkdown(post.body).slice(0, 180) : null
 
   return (
     <article>
       <Link href={`/blog/${post.slug}`} className="group block">
         {firstPhoto && (
-          <div className="relative w-full aspect-[4/3] mb-4 overflow-hidden rounded-sm">
+          <div className="relative w-full aspect-[4/3] mb-5 overflow-hidden">
             <Image
               src={getPhotoUrl(firstPhoto.storage_path)}
               alt={post.title}
@@ -42,7 +42,10 @@ export default function PostCard({ post }: { post: Post }) {
           </div>
         )}
 
-        <time className="text-xs text-muted tracking-wide uppercase">
+        <time
+          className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted"
+          style={{ fontFamily: 'var(--font-sans)' }}
+        >
           {new Date(post.created_at).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -50,14 +53,16 @@ export default function PostCard({ post }: { post: Post }) {
           })}
         </time>
 
-        <h2 className="font-serif text-2xl mt-1.5 mb-2 group-hover:text-accent transition-colors leading-snug">
+        <h2
+          className="font-serif font-medium opsz-text text-xl mt-1.5 mb-2.5 leading-snug group-hover:text-accent transition-colors duration-200"
+        >
           {post.title}
         </h2>
 
         {excerpt && (
           <p className="text-muted text-sm leading-relaxed">
             {excerpt}
-            {post.body && post.body.length > 160 ? '…' : ''}
+            {post.body && post.body.length > 180 ? '…' : ''}
           </p>
         )}
       </Link>
