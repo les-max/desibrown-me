@@ -28,43 +28,77 @@ export default function PostCard({ post }: { post: Post }) {
 
   const excerpt = post.body ? stripMarkdown(post.body).slice(0, 180) : null
 
+  const date = new Date(post.created_at)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
+  const year = date.getFullYear()
+
   return (
     <article>
       <Link href={`/blog/${post.slug}`} className="group block">
         {firstPhoto && (
-          <div className="relative w-full aspect-[4/3] mb-5 overflow-hidden">
+          <div className="relative w-full aspect-[4/3] mb-6 overflow-hidden">
             <Image
               src={getPhotoUrl(firstPhoto.storage_path)}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
             />
           </div>
         )}
 
-        <time
-          className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted"
-          style={{ fontFamily: 'var(--font-sans)' }}
-        >
-          {new Date(post.created_at).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-          })}
-        </time>
+        <div className="flex gap-5 items-start">
+          {/* Margin annotation: day number + month/year */}
+          <div className="w-9 shrink-0 select-none pt-0.5">
+            <span
+              className="font-serif font-light block leading-none opsz-text"
+              style={{
+                fontSize: '2.25rem',
+                color: 'var(--border)',
+                fontVariationSettings: "'opsz' 9, 'wght' 200",
+              }}
+            >
+              {day}
+            </span>
+            <span
+              className="block leading-tight mt-1"
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: '0.6rem',
+                fontWeight: 500,
+                letterSpacing: '0.08em',
+                color: 'var(--muted)',
+              }}
+            >
+              {month}
+              <br />
+              {year}
+            </span>
+          </div>
 
-        <h2
-          className="font-serif font-medium opsz-text text-xl mt-1.5 mb-2.5 leading-snug group-hover:text-accent transition-colors duration-200"
-        >
-          {post.title}
-        </h2>
-
-        {excerpt && (
-          <p className="text-muted text-sm leading-relaxed">
-            {excerpt}
-            {post.body && post.body.length > 180 ? '…' : ''}
-          </p>
-        )}
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <h2
+              className="font-serif font-semibold opsz-text leading-snug group-hover:text-accent transition-colors duration-200"
+              style={{ fontSize: '1.3rem' }}
+            >
+              {post.title}
+            </h2>
+            {excerpt && (
+              <p
+                className="mt-2 leading-relaxed"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.875rem',
+                  color: 'var(--muted)',
+                }}
+              >
+                {excerpt}
+                {post.body && post.body.length > 180 ? '…' : ''}
+              </p>
+            )}
+          </div>
+        </div>
       </Link>
     </article>
   )

@@ -50,73 +50,117 @@ export default async function PostPage({ params }: Props) {
     .slice()
     .sort((a, b) => a.order_index - b.order_index)
 
+  const date = new Date(post.created_at)
+  const day = String(date.getDate()).padStart(2, '0')
+  const month = date.toLocaleDateString('en-US', { month: 'short' }).toUpperCase()
+  const year = date.getFullYear()
+
   return (
     <>
       <Nav />
       <main className="max-w-2xl mx-auto px-6 py-12">
-        <Link
-          href="/"
-          className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted hover:text-accent transition-colors duration-200 inline-block mb-12"
-          style={{ fontFamily: 'var(--font-sans)' }}
-        >
-          ← Back
-        </Link>
+        <div className="reveal" style={{ animationDelay: '0ms' }}>
+          <Link
+            href="/"
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.7rem',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              color: 'var(--muted)',
+              display: 'inline-block',
+              marginBottom: '3rem',
+              transition: 'color 200ms ease-out',
+              textDecoration: 'none',
+            }}
+            onMouseEnter={undefined}
+            className="hover:text-accent"
+          >
+            ← Back
+          </Link>
+        </div>
 
         <article>
-          <header className="mb-10 pb-8 border-b border-border">
-            <time
-              className="text-[0.7rem] font-medium tracking-[0.1em] uppercase text-muted"
-              style={{ fontFamily: 'var(--font-sans)' }}
-            >
-              {new Date(post.created_at).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </time>
+          {/* Header: margin-date + big title */}
+          <header
+            className="reveal mb-10 pb-10 border-b border-border flex gap-6 items-start"
+            style={{ animationDelay: '60ms' }}
+          >
+            <div className="w-10 shrink-0 pt-1 select-none">
+              <span
+                className="font-serif font-light block leading-none opsz-text"
+                style={{
+                  fontSize: '2.5rem',
+                  color: 'var(--border)',
+                  fontVariationSettings: "'opsz' 9, 'wght' 200",
+                }}
+              >
+                {day}
+              </span>
+              <span
+                className="block leading-tight mt-1"
+                style={{
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: '0.6rem',
+                  fontWeight: 500,
+                  letterSpacing: '0.08em',
+                  color: 'var(--muted)',
+                }}
+              >
+                {month}<br />{year}
+              </span>
+            </div>
+
             <h1
-              className="font-serif font-bold opsz-display mt-3 leading-tight text-foreground"
+              className="font-serif font-bold opsz-display flex-1 text-foreground"
               style={{
-                fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
-                letterSpacing: '-0.01em',
+                fontSize: 'clamp(1.9rem, 4.5vw, 3rem)',
+                letterSpacing: '-0.02em',
+                lineHeight: 1.05,
               }}
             >
               {post.title}
             </h1>
           </header>
 
-          {post.body && (
-            <div className="prose">
-              <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                {post.body}
-              </ReactMarkdown>
-            </div>
-          )}
+          <div
+            className="reveal"
+            style={{ animationDelay: '120ms' }}
+          >
+            {post.body && (
+              <div className="prose">
+                <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                  {post.body}
+                </ReactMarkdown>
+              </div>
+            )}
 
-          {photos.length > 0 && (
-            <div
-              className={`mt-12 grid gap-1.5 ${
-                photos.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
-              }`}
-            >
-              {photos.map((photo, i) => (
-                <div
-                  key={photo.id}
-                  className={`relative overflow-hidden ${
-                    photos.length === 1 ? 'aspect-[4/3]' : 'aspect-square'
-                  }`}
-                >
-                  <Image
-                    src={getPhotoUrl(photo.storage_path)}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    priority={i === 0}
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+            {photos.length > 0 && (
+              <div
+                className={`mt-12 grid gap-1.5 ${
+                  photos.length === 1 ? 'grid-cols-1' : 'grid-cols-2'
+                }`}
+              >
+                {photos.map((photo, i) => (
+                  <div
+                    key={photo.id}
+                    className={`relative overflow-hidden ${
+                      photos.length === 1 ? 'aspect-[4/3]' : 'aspect-square'
+                    }`}
+                  >
+                    <Image
+                      src={getPhotoUrl(photo.storage_path)}
+                      alt=""
+                      fill
+                      className="object-cover"
+                      priority={i === 0}
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
         </article>
       </main>
     </>

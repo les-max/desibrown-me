@@ -21,25 +21,43 @@ export default async function Home() {
       <Nav />
       <main className="max-w-2xl mx-auto px-6">
 
-        <header className="pt-16 pb-14 border-b border-border">
+        {/* Header: title left, tagline right — tension on purpose */}
+        <header
+          className="reveal pt-16 pb-14 border-b border-border flex items-end justify-between gap-8"
+          style={{ animationDelay: '0ms' }}
+        >
           <h1
-            className="font-serif font-black opsz-display leading-none tracking-tight text-foreground"
-            style={{ fontSize: 'clamp(3.5rem, 10vw, 6.5rem)', letterSpacing: '-0.02em' }}
+            className="font-serif font-black opsz-display text-foreground leading-none shrink-0"
+            style={{
+              fontSize: 'clamp(4rem, 12vw, 7.5rem)',
+              letterSpacing: '-0.03em',
+              lineHeight: 0.88,
+            }}
           >
             Desi<br />Brown.
           </h1>
+
           <p
-            className="mt-5 text-muted text-sm leading-relaxed max-w-xs"
-            style={{ fontFamily: 'var(--font-sans)' }}
+            className="text-right text-muted shrink-0 pb-1"
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.8rem',
+              lineHeight: 1.7,
+              maxWidth: '16ch',
+            }}
           >
-            Notes and photos from my corner of the world.
+            Notes and photos<br />from my corner<br />of the world.
           </p>
         </header>
 
         {posts && posts.length > 0 ? (
           <div className="py-14 space-y-14">
             {posts.map((post, i) => (
-              <div key={post.id}>
+              <div
+                key={post.id}
+                className="reveal"
+                style={{ animationDelay: `${80 + i * 70}ms` }}
+              >
                 <PostCard post={post} />
                 {i < posts.length - 1 && (
                   <div className="mt-14 border-t border-border" />
@@ -48,7 +66,17 @@ export default async function Home() {
             ))}
           </div>
         ) : (
-          <p className="text-muted text-sm py-14">Nothing here yet — check back soon.</p>
+          <p
+            className="reveal py-14"
+            style={{
+              fontFamily: 'var(--font-sans)',
+              fontSize: '0.875rem',
+              color: 'var(--muted)',
+              animationDelay: '80ms',
+            }}
+          >
+            Nothing here yet — check back soon.
+          </p>
         )}
       </main>
     </>
