@@ -101,7 +101,7 @@ export default function PostEditor({ post }: { post?: Post }) {
       router.refresh()
     } catch (e) {
       console.error(e)
-      setError('Something went wrong. Please try again.')
+      setError(e instanceof Error ? e.message : String(e))
     } finally {
       setSaving(false)
     }
