@@ -1,5 +1,4 @@
 import { createClient } from '@/lib/supabase/server'
-import Nav from '@/components/Nav'
 import PostCard from '@/components/PostCard'
 
 export const revalidate = 60
@@ -17,9 +16,7 @@ export default async function Home() {
     .order('created_at', { ascending: false })
 
   return (
-    <>
-      <Nav />
-      <main className="max-w-2xl mx-auto px-6">
+    <main className="max-w-2xl mx-auto px-6">
 
         {/* Header: title left, tagline right — tension on purpose */}
         <header
@@ -78,7 +75,6 @@ export default async function Home() {
             Nothing here yet — check back soon.
           </p>
         )}
-      </main>
-    </>
+    </main>
   )
 }

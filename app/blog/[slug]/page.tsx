@@ -4,7 +4,6 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import Nav from '@/components/Nav'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -56,9 +55,7 @@ export default async function PostPage({ params }: Props) {
   const year = date.getFullYear()
 
   return (
-    <>
-      <Nav />
-      <main className="max-w-2xl mx-auto px-6 py-12">
+    <main className="max-w-2xl mx-auto px-6 py-12">
         <div className="reveal" style={{ animationDelay: '0ms' }}>
           <Link
             href="/"
@@ -162,7 +159,6 @@ export default async function PostPage({ params }: Props) {
             )}
           </div>
         </article>
-      </main>
-    </>
+    </main>
   )
 }
