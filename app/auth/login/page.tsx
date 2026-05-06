@@ -11,7 +11,7 @@ export default function LoginPage() {
 
   const supabase = createClient()
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     setError('')
@@ -24,7 +24,7 @@ export default function LoginPage() {
     })
 
     if (error) {
-      setError('Something went wrong. Please try again.')
+      setError(error.message)
     } else {
       setSent(true)
     }
