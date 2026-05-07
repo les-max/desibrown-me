@@ -44,5 +44,24 @@ create policy "Authenticated users can manage photos"
   on photos for all
   using (auth.role() = 'authenticated');
 
+-- Site settings (single-row singleton)
+create table site_settings (
+  id boolean primary key default true,
+  subtitle text not null default '',
+  constraint only_one_row check (id = true)
+);
+
+alter table site_settings enable row level security;
+
+create policy "Public can read site settings"
+  on site_settings for select
+  using (true);
+
+create policy "Authenticated users can update site settings"
+  on site_settings for update
+  using (auth.role() = 'authenticated');
+
+insert into site_settings (subtitle) values (E'Notes and photos\nfrom my corner\nof the world.');
+
 -- Storage bucket (run in Supabase SQL editor or Storage dashboard)
 -- Create a bucket named "post-photos" with public access enabled

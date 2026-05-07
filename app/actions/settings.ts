@@ -1,0 +1,14 @@
+'use server'
+
+import { createClient } from '@/lib/supabase/server'
+import { revalidatePath } from 'next/cache'
+
+export async function updateSubtitle(subtitle: string) {
+  const supabase = await createClient()
+  const { error } = await supabase
+    .from('site_settings')
+    .update({ subtitle })
+    .eq('id', true)
+  if (error) throw error
+  revalidatePath('/')
+}

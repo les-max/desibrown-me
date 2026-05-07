@@ -6,14 +6,19 @@ export const revalidate = 60
 export default async function Home() {
   const supabase = await createClient()
 
-  const { data: posts } = await supabase
-    .from('posts')
-    .select(`
-      id, title, slug, body, created_at,
-      photos(storage_path, order_index)
-    `)
-    .eq('published', true)
-    .order('created_at', { ascending: false })
+  const [{ data: posts }, { data: settings }] = await Promise.all([
+    supabase
+      .from('posts')
+      .select(`
+        id, title, slug, body, created_at,
+        photos(storage_path, order_index)
+      `)
+      .eq('published', true)
+      .order('created_at', { ascending: false }),
+    supabase.from('site_settings').select('subtitle').single(),
+  ])
+
+  const subtitleLines = (settings?.subtitle ?? '').split('\n')
 
   return (
     <main className="max-w-2xl mx-auto px-6">
@@ -43,7 +48,9 @@ export default async function Home() {
               maxWidth: '16ch',
             }}
           >
-            Notes and photos<br />from my corner<br />of the world.
+            {subtitleLines.map((line: string, i: number) => (
+              <span key={i}>{line}{i < subtitleLines.length - 1 && <br />}</span>
+            ))}
           </p>
         </header>
 
